@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  startup:
+
+services:
+  go:
+    # image: golang:1.18.2
+    container_name: startup_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # target: dev
+    # working_dir: /code
+    volumes:
+      - ./src:/code
+    stdin_open: true
+    tty: true
+    ports:
+      - "8080:8080"
+    restart:
+      always
+    networks:
+      - startup
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER=adib
+      - MYSQL_PASSWORD=sarirejo
+      - MYSQL_ROOT_PASSWORD=sarirejo
+      - MYSQL_DATABASE=startup
+    restart: unless-stopped
+    networks:
+      - startup
+  pma:
+    image: phpmyadmin:latest
+    ports:
+        - "8083:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: sarirejo
+      PMA_HOST: mysql
+      PMA_USER: adib
+      PMA_PASSWORD: sarirejo
+    networks:
+      - startup
+    
