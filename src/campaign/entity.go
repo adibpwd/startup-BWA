@@ -19,7 +19,7 @@ type Campaign struct {
 type CampaignImage struct {
 	ID         int
 	CampaignID int
-	FileName   string
+	Filename   string
 	IsPrimary  int
 	CreatedAt  int
 	UpdatedAt  int
