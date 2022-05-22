@@ -30,10 +30,6 @@ func main() {
 	authService := auth.NewService()
 	campaignService := campaign.NewService(campaignRepository)
 
-	// campaigns, err := campaignService.FindCampaigns(0)
-
-	// fmt.Println(len(campaigns))
-
 	userHandler := handler.NewUserHandler(userService, authService)
 	campaignHandler := handler.NewCampaignHandler(campaignService)
 	router := gin.Default()
@@ -47,6 +43,7 @@ func main() {
 
 	api.GET("campaigns", campaignHandler.GetCampaigns)
 	api.GET("campaigns/:id", campaignHandler.GetCampaign)
+	api.POST("campaigns", authMiddleware(authService, userService), campaignHandler.CreateCampaign)
 	router.Run()
 }
 
