@@ -1,6 +1,9 @@
 package transaction
 
-import "startup/user"
+import (
+	"startup/campaign"
+	"startup/user"
+)
 
 type Transaction struct {
 	ID         int
@@ -10,6 +13,7 @@ type Transaction struct {
 	Status     string
 	Code       string
 	User       user.User
+	Campaign   campaign.Campaign
 	CreatedAt  int
 	UpdatedAt  int
 }
