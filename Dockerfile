@@ -11,9 +11,9 @@ COPY /src /code
 
 # RUN go get github.com/canthefason/go-watcher
 
-RUN go mod download && go mod verify
+# RUN go mod download && go mod verify
 
-CMD ["air"]
+# CMD ["air"]
 
 # RUN go get github.com/codegangsta/gin
 

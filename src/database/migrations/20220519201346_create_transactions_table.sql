@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `amount` INT,
   `status` VARCHAR(255),
   `code` VARCHAR(255),
+  `payment_url` VARCHAR(255) DEFAULT NULL,
   `created_at` INT,
   `updated_at` INT DEFAULT NULL,
   PRIMARY KEY `pk_id`(`id`),
