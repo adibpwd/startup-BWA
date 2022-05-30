@@ -3,6 +3,8 @@ package transaction
 import (
 	"startup/campaign"
 	"startup/user"
+
+	"github.com/leekchan/accounting"
 )
 
 type Transaction struct {
@@ -17,4 +19,9 @@ type Transaction struct {
 	Campaign   campaign.Campaign
 	CreatedAt  int
 	UpdatedAt  int
+}
+
+func (t Transaction) FormatAmountIDR() string {
+	ac := accounting.Accounting{Symbol: "Rp. ", Precision: 2, Thousand: ".", Decimal: ","}
+	return ac.FormatMoney(t.Amount)
 }

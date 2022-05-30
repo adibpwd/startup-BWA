@@ -1,6 +1,10 @@
 package campaign
 
-import "startup/user"
+import (
+	"startup/user"
+
+	"github.com/leekchan/accounting"
+)
 
 type Campaign struct {
 	ID               int
@@ -19,10 +23,20 @@ type Campaign struct {
 	User             user.User
 }
 
+func (c Campaign) GoalAmountFormatIDR() string {
+	ac := accounting.Accounting{Symbol: "Rp. ", Precision: 2, Thousand: ".", Decimal: ","}
+	return ac.FormatMoney(c.GoalAmount)
+}
+
+func (c Campaign) CurrentAmountFormatIDR() string {
+	ac := accounting.Accounting{Symbol: "Rp. ", Precision: 2, Thousand: ".", Decimal: ","}
+	return ac.FormatMoney(c.CurrentAmount)
+}
+
 type CampaignImage struct {
 	ID         int
 	CampaignID int
-	Filename   string
+	FileName   string
 	IsPrimary  int
 	CreatedAt  int
 	UpdatedAt  int

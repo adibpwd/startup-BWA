@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS `campaign_images` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `campaign_id` INT UNSIGNED NOT NULL,
-  `filename` VARCHAR(255),
+  `file_name` VARCHAR(255),
   `is_primary` BOOLEAN, 
   `created_at` INT,
   `updated_at` INT DEFAULT NULL,

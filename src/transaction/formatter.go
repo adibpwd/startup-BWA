@@ -52,7 +52,7 @@ func FormatUserTransaction(transaction Transaction) UserTransactionFormatter {
 	campaignFormatter.ImageURL = ""
 
 	if len(transaction.Campaign.CampaignImages) > 0 {
-		campaignFormatter.ImageURL = transaction.Campaign.CampaignImages[0].Filename
+		campaignFormatter.ImageURL = transaction.Campaign.CampaignImages[0].FileName
 	}
 
 	formatter.Campaign = campaignFormatter

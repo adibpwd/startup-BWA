@@ -25,7 +25,7 @@ func FormatCampaign(campaign Campaign) CampaignFormatter {
 	campaignFormatter.ImageURL = ""
 
 	if len(campaign.CampaignImages) > 0 {
-		campaignFormatter.ImageURL = campaign.CampaignImages[0].Filename
+		campaignFormatter.ImageURL = campaign.CampaignImages[0].FileName
 	}
 
 	return campaignFormatter
@@ -80,7 +80,7 @@ func FormatCampaignDetail(campaign Campaign) CampaignDetailFormatter {
 	campaignDetailFormatter.ImageURL = ""
 
 	if len(campaign.CampaignImages) > 0 {
-		campaignDetailFormatter.ImageURL = campaign.CampaignImages[0].Filename
+		campaignDetailFormatter.ImageURL = campaign.CampaignImages[0].FileName
 	}
 
 	var perks []string
@@ -103,7 +103,7 @@ func FormatCampaignDetail(campaign Campaign) CampaignDetailFormatter {
 
 	for _, image := range campaign.CampaignImages {
 		campaignImagesFormatter := CampaignImageFormatter{}
-		campaignImagesFormatter.ImageURL = image.Filename
+		campaignImagesFormatter.ImageURL = image.FileName
 
 		isPrimary := false
 

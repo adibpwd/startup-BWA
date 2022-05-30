@@ -139,7 +139,6 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 
 	err = c.SaveUploadedFile(file, path)
 	if err != nil {
-		fmt.Println(err)
 		data := gin.H{"is_uploaded2": false}
 		response := helper.APIResponse("Failed to upload avatar image", http.StatusBadRequest, "error", data)
 
