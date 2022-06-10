@@ -53,19 +53,23 @@ func (h *userHandler) RegisterUser(c *gin.Context) {
 func (h *userHandler) Login(c *gin.Context) {
 	var input user.LoginInput
 
+	fmt.Println("sampai disini3333333")
 	err := c.ShouldBindJSON(&input)
 
 	if err != nil {
+		fmt.Println("sampai disini122222222")
 		errors := helper.FormatValidationError(err)
 		errorMessage := gin.H{"errors": errors}
+		fmt.Println(errorMessage)
 		response := helper.APIResponse("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
 
 	loggedinUser, err := h.userService.Login(input)
-
+	fmt.Println("sini lagi")
 	if err != nil {
+		fmt.Println("sampai disini111111")
 		errorMessage := gin.H{"errors": err.Error()}
 		response := helper.APIResponse("Login failed", http.StatusUnprocessableEntity, "error", errorMessage)
 		c.JSON(http.StatusBadRequest, response)
@@ -74,6 +78,7 @@ func (h *userHandler) Login(c *gin.Context) {
 
 	token, err := h.authService.GenerateToken(loggedinUser.ID)
 	if err != nil {
+		fmt.Println("sampai disini")
 		response := helper.APIResponse("Register account failed", http.StatusBadRequest, "error", nil)
 		c.JSON(http.StatusBadRequest, response)
 		return
@@ -158,5 +163,13 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 	data := gin.H{"is_uploaded": true}
 	response := helper.APIResponse("Avatar successfuly uploaded", http.StatusOK, "success", data)
 
+	c.JSON(http.StatusOK, response)
+}
+
+func (h *userHandler) FetchUser(c *gin.Context) {
+	currentUser := c.MustGet("currentUser").(user.User)
+	formatter := user.FormatUser(currentUser, "")
+
+	response := helper.APIResponse("Successfully fetch user", http.StatusOK, "success", formatter)
 	c.JSON(http.StatusOK, response)
 }

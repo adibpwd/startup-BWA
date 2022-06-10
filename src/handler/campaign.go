@@ -20,8 +20,8 @@ func NewCampaignHandler(service campaign.Service) *campaignHandler {
 }
 
 func (h *campaignHandler) GetCampaigns(c *gin.Context) {
-	userID, err := strconv.Atoi(c.Query("user_id"))
-
+	userID, _ := strconv.Atoi(c.Query("user_id"))
+	fmt.Println(userID)
 	campaigns, err := h.service.GetCampaigns(userID)
 	if err != nil {
 		response := helper.APIResponse("Error to get campaigns", http.StatusBadRequest, "error", nil)
@@ -77,7 +77,8 @@ func (h *campaignHandler) CreateCampaign(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	response := helper.APIResponse("Success to create campaign", http.StatusOK, "success", newCampaign)
+	formatter := campaign.FormatCampaign(newCampaign)
+	response := helper.APIResponse("Success to create campaign", http.StatusOK, "success", formatter)
 	c.JSON(http.StatusOK, response)
 }
 

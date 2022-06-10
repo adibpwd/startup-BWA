@@ -23,7 +23,7 @@ func (h *sessionHandler) New(c *gin.Context) {
 
 func (h *sessionHandler) Create(c *gin.Context) {
 	var input user.LoginInput
-
+	fmt.Println("masuk create loh")
 	err := c.ShouldBind(&input)
 	if err != nil {
 		fmt.Println("11111111111111")

@@ -1,6 +1,8 @@
 package campaign
 
 import (
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -39,6 +41,8 @@ func (r *repository) FindByUserID(userID int) ([]Campaign, error) {
 	if err != nil {
 		return campaigns, err
 	}
+	fmt.Println("campaigns")
+	fmt.Println(campaigns)
 
 	return campaigns, nil
 }
