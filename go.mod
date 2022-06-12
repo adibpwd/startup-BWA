@@ -1,4 +1,4 @@
-// +heroku goVersion go1.13 to go.mod
+// +heroku goVersion go1.13
 module startup
 
 go 1.13
