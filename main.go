@@ -13,9 +13,8 @@ import (
 	"startup/payment"
 	"startup/transaction"
 	"startup/user"
-	"strings"
-
 	webHandler "startup/web/handler"
+	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/multitemplate"
