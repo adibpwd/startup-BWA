@@ -36,18 +36,18 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		HOST := os.Getenv("DB_HOST")
-		PORT := os.Getenv("DB_PORT")
-		database := os.Getenv("DB_NAME")
-		username := os.Getenv("DB_USER")
-		password := os.Getenv("DB_PASS")
-
-		dbUrl = fmt.Sprintf("postgres://%s:%s@%s:%s/%s", username, password, HOST, PORT, database)
-		fmt.Println(dbUrl)
-	} else {
-		dbUrl = os.Getenv("DATABASE_URL")
 	}
 
+	HOST := os.Getenv("DB_HOST")
+	PORT := os.Getenv("DB_PORT")
+	database := os.Getenv("DB_NAME")
+	username := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASS")
+
+	// dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+	// 	HOST, PORT, username, password, database, sslmode)
+	dbUrl = fmt.Sprintf("postgres://%s:%s@%s:%s/%s", username, password, HOST, PORT, database)
+	fmt.Println(dbUrl)
 	db, err := gorm.Open(postgres.Open(dbUrl), &gorm.Config{})
 	fmt.Println("mantap guys")
 	if err != nil {
