@@ -13,7 +13,7 @@ services:
       # target: dev
     # working_dir: /code
     volumes:
-      - ./src:/code
+      - ./:/code
     stdin_open: true
     tty: true
     ports:
@@ -24,28 +24,49 @@ services:
       always
     networks:
       - startup
-  mysql:
-    image: mysql:latest
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
+  postgres_db:
+    image: postgres:14.1-alpine
+    container_name: startup_postgres_db
+    # volumes:
+    #   - ./docker/postgres:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5433:5432"
     environment:
-      - MYSQL_USER=adib
-      - MYSQL_PASSWORD=sarirejo
-      - MYSQL_ROOT_PASSWORD=sarirejo
-      - MYSQL_DATABASE=startup
-    restart: unless-stopped
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=sarirejo
+      - POSTGRES_DB=startup
+    restart: always
     networks:
       - startup
-  pma:
-    image: phpmyadmin:latest
+  adminer:
+    image: adminer
+    restart: always
     ports:
-        - "8083:80"
-    environment:
-      MYSQL_ROOT_PASSWORD: sarirejo
-      PMA_HOST: mysql
-      PMA_USER: adib
-      PMA_PASSWORD: sarirejo
+      - 8080:8080
     networks:
       - startup
+  # mysql:
+  #   image: mysql:latest
+  #   volumes:
+  #     - ./docker/mysql:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     - MYSQL_USER=adib
+  #     - MYSQL_PASSWORD=sarirejo
+  #     - MYSQL_ROOT_PASSWORD=sarirejo
+  #     - MYSQL_DATABASE=startup
+  #   restart: unless-stopped
+  #   networks:
+  #     - startup
+  # pma:
+  #   image: phpmyadmin:latest
+  #   ports:
+  #       - "8083:80"
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: sarirejo
+  #     PMA_HOST: mysql
+  #     PMA_USER: adib
+  #     PMA_PASSWORD: sarirejo
+  #   networks:
+  #     - startup

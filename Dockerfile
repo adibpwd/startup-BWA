@@ -4,7 +4,7 @@ RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh 
 
 WORKDIR /code
 
-COPY /src /code
+COPY ./ /code
 
 
 # RUN go get github.com/cosmtrek/air
